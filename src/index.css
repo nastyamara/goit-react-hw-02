@@ -24,8 +24,9 @@ a:hover {
 
 body {
   margin: 0;
+  margin-left: 20px;
   display: flex;
-  place-items: center;
+ 
   min-width: 320px;
   min-height: 100vh;
 }
@@ -45,6 +46,12 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+ 
+
+  
+}
+button:not(:last-child) {
+  margin-right: 10px;
 }
 button:hover {
   border-color: #646cff;
@@ -65,4 +72,8 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+ul {
+  list-style: none;
 }
