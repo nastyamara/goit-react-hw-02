@@ -1,64 +1,53 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Description from "../Description/Description"
 import Options from "../Options/Options"
 import Feedback from "../Feedback/Feedback";
 import Notification from "../Notification/Notification";
 
-
-
 function App() {
 
+  const [feedback, setFeedback] = useState(() => { 
+    const savedFeedback = localStorage.getItem('feedbackNumber');
+    if (savedFeedback !== 0) { return JSON.parse(savedFeedback); }
 
-const [review, setReview] = useState({
-  good: 0,
-	neutral: 0,
-	bad: 0
+  return (  {
+      good:0,
+      neutral:0,
+      bad:0,
+    })
+  
 });
   
-  const totalFeedback = review.good + review.neutral + review.bad;
+  const totalFeedback = feedback.good + feedback.neutral + feedback.bad;
   console.log(totalFeedback);
 
-const handleReviewGood = () => {
-  setReview({...review,
-    good: review.good + 1
+const updateFeedback = feedbackType => {
+ setFeedback({...feedback,
+   [feedbackType]: feedback[feedbackType] + 1
   }) 
-  console.log(review);
+  console.log(feedback);
 }
-  
-const handleReviewNeutral = () => {
-   setReview({...review,
-    neutral: review.neutral + 1
-  }) 
-  console.log(review);
-}
-  
-const handleReviewBad = () => {
-   setReview({...review,
-    bad: review.bad + 1
-  }) 
-}
-  const resetReview = () => setReview({
+
+  const resetFeedback = () => setFeedback({
   good: 0,
 	neutral: 0,
 	bad: 0
 });
 
-//  props for feedback
+  useEffect(() => {
+    localStorage.setItem('feedbackNumber', JSON.stringify(feedback));
+  }, [feedback])
 
   return (
     <div>
-
-      <Description />
-      
-      <Options onUpdateGood={handleReviewGood}
-        onUpdateNeutral={handleReviewNeutral}
-        onUpdateBad={handleReviewBad}
+      <Description /> 
+      <Options onUpdate={updateFeedback}
         totalFeedback={totalFeedback}
-        reset={ resetReview} />
+        reset={ resetFeedback } />
       
-      {totalFeedback === 0 ? <Notification />: <Feedback value={review} />}
-      
-  
+      {totalFeedback === 0 ? <Notification /> :
+        <Feedback value={feedback} total={ totalFeedback } />}
+    
     </div>
  
   )
