@@ -8,7 +8,7 @@ function App() {
 
   const [feedback, setFeedback] = useState(() => { 
     const savedFeedback = localStorage.getItem('feedbackNumber');
-    if (savedFeedback !== 0) { return JSON.parse(savedFeedback); }
+    if (savedFeedback !== null) { return JSON.parse(savedFeedback); }
 
   return (  {
       good:0,
