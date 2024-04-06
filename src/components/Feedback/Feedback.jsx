@@ -7,8 +7,7 @@ export default function Feedback({value, total, positive}) {
             <li>Total: { total}</li>
             <li>Positive: { positive}%</li>
        
-        
-           
+    
         </ul>
     )
 }

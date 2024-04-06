@@ -19,14 +19,14 @@ function App() {
 });
   
   const totalFeedback = feedback.good + feedback.neutral + feedback.bad;
-  console.log(totalFeedback);
+ 
   const positiveFeedback = Math.round((feedback.good / totalFeedback) * 100);
 
 const updateFeedback = feedbackType => {
  setFeedback({...feedback,
    [feedbackType]: feedback[feedbackType] + 1
   }) 
-  console.log(feedback);
+
 }
 
   const resetFeedback = () => setFeedback({
